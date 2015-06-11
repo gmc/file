@@ -491,6 +491,7 @@ protected int file_os2_apptype(struct magic_set *, const char *, const void *,
 
 #if defined(HAVE_LOCALE_H)
 #include <locale.h>
+#include <xlocale.h>
 #endif
 #if defined(HAVE_XLOCALE_H)
 #include <xlocale.h>

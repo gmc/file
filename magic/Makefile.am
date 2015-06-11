@@ -5,7 +5,7 @@ MAGIC_FRAGMENT_BASE = Magdir
 MAGIC_DIR = $(top_srcdir)/magic
 MAGIC_FRAGMENT_DIR = $(MAGIC_DIR)/$(MAGIC_FRAGMENT_BASE)
 
-pkgdata_DATA = magic.mgc
+pkgdata_DATA = magic.mgc magic
 
 EXTRA_DIST = \
 $(MAGIC_DIR)/Header \
@@ -301,3 +301,14 @@ ${MAGIC}: $(EXTRA_DIST) $(FILE_COMPILE_DEP)
 	  fi)
 	$(FILE_COMPILE) -C -m magic
 	@rm -fr magic
+
+magic: $(EXTRA_DIST) $(MAGIC)
+	for frag in $(EXTRA_DIST); do \
+		if test -f $(srcdir)/$$frag; then \
+			f=$(srcdir)/$$frag; \
+		else \
+			f=$$frag; \
+		fi; \
+		cat $$f; \
+	done >> $@
+
